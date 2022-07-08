@@ -3,12 +3,9 @@ import { nanoid } from 'nanoid'
 import ContactForm from "./ContactForm";
 import Filter from "./Filter";
 import ContactList from "./ContactList";
+import { Container, FormBox } from "./Phonebook.styled"
 
 class Phonebook extends Component {
-    static defaultProps = {};
-
-    static propTypes = {};
-    
     state = {
         contacts: [
             { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
@@ -35,37 +32,41 @@ class Phonebook extends Component {
         form.reset();
     };
 
-    changeFilter = (e) => { 
-        this.setState({contacts: e.currentTarget.value})
-    };
-
     deleteContact = (contactId) => {
-        console.log(contactId);
         this.setState(prevState => ({
             contacts: prevState.contacts.filter(contact => contact.id !== contactId)
         }));
     };
 
-    render() {
+    changeFilter = (e) => { 
+        this.setState({filter: e.currentTarget.value})
+    };
 
-        const filtredContacts = this.state.contacts.filter(contact => contact.name.toLowerCase().includes(this.state.filter.toLowerCase()));
+    getfiltredContacts = () => {
+        const { filter, contacts } = this.state;
+        return contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()),);
+    };
+
+    render() {
+        
+        const filtredContacts = this.getfiltredContacts();
 
         return (    
-            <section>
-                <div>
-                    <h1>Phonebook</h1>
+            <Container>
+                <h1>Phonebook</h1>
+                <FormBox>
                     <ContactForm
                         onSubmitForm={this.handleSubmit}
                         inputName={"Name"}
                         inputNumber={"Number"}
                         buttonName={"Add cotact"} />   
-                </div>
+                </FormBox>
                 <div>
                     <h2>Contacts</h2>
                     <Filter inputName={"Find contacts by name"} value={this.state.filter} onChange={this.changeFilter} />
                     <ContactList contacts={filtredContacts} buttonName={"Delete"} onBtnClick={this.deleteContact} />
                 </div>
-            </section>
+            </Container>
         );}
 }
 

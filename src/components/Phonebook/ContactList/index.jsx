@@ -1,4 +1,4 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 // import {  } from './ContactList.styled'
 
 const ContactList = ({ contacts, buttonName, onBtnClick }) => { 
@@ -15,7 +15,12 @@ const ContactList = ({ contacts, buttonName, onBtnClick }) => {
 };
 
 ContactList.propTypes = {
-    
+    contacts: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string,
+        number: PropTypes.string,
+    })),
+    buttonName: PropTypes.string.isRequired,
+    onBtnClick: PropTypes.func,
 };
 
 export default ContactList;
