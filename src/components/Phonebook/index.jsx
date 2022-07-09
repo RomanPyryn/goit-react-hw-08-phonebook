@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid'
 import ContactForm from "./ContactForm";
 import Filter from "./Filter";
 import ContactList from "./ContactList";
-import { Container, FormBox } from "./Phonebook.styled"
+import { Container, FormBox, ContactsBox } from "./Phonebook.styled"
 
 class Phonebook extends Component {
     state = {
@@ -61,11 +61,11 @@ class Phonebook extends Component {
                         inputNumber={"Number"}
                         buttonName={"Add cotact"} />   
                 </FormBox>
-                <div>
                     <h2>Contacts</h2>
+                <ContactsBox>
                     <Filter inputName={"Find contacts by name"} value={this.state.filter} onChange={this.changeFilter} />
                     <ContactList contacts={filtredContacts} buttonName={"Delete"} onBtnClick={this.deleteContact} />
-                </div>
+                </ContactsBox>
             </Container>
         );}
 }

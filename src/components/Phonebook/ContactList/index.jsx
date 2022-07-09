@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
-// import {  } from './ContactList.styled'
+import { ContactListUl, ContactItem, ContactSpan, ContactBtn } from './ContactList.styled'
 
 const ContactList = ({ contacts, buttonName, onBtnClick }) => { 
     return (
-        <ul>
-            {contacts.map(contact => (<li key={contact.id}>
-                <span>{contact.name}</span>
-                <span>{contact.number}</span>
-                <button type="button" onClick={() => onBtnClick(contact.id)} >{buttonName}</button>
-            </li>))}
-        </ul>
+        <ContactListUl>
+            {contacts.map(contact => (<ContactItem key={contact.id}>
+                <ContactSpan>{contact.name}</ContactSpan>
+                <ContactSpan>{contact.number}</ContactSpan>
+                <ContactBtn type="button" onClick={() => onBtnClick(contact.id)} >{buttonName}</ContactBtn>
+            </ContactItem>))}
+        </ContactListUl>
         
     )
 };
