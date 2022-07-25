@@ -1,85 +1,76 @@
-import { Component } from "react";
+import { useState, useEffect, useRef } from "react";
 import { nanoid } from 'nanoid'
 import ContactForm from "./ContactForm";
 import Filter from "./Filter";
 import ContactList from "./ContactList";
 import { Container, FormBox, ContactsBox } from "./Phonebook.styled"
 
-class Phonebook extends Component {
-    state = {
-        contacts: [],
-        filter: ''
-    };
+export default function Phonebook() {
+    const [contacts, setContacts] = useState([]);
+    const [filter, setFilter] = useState('');
 
-    handleSubmit = e => {
+    const isFirstRender = useRef(true);
+
+    useEffect(() => { 
+        const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
+
+        console.log(parsedContacts);
+        if (parsedContacts) {
+            setContacts(parsedContacts);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+            return;
+        };
+        localStorage.setItem('contacts', JSON.stringify(contacts));
+    }, [contacts]);
+
+    const handleSubmit = e => {
         e.preventDefault();
         const form = e.currentTarget;
         const inputName = form.elements.name.value;
         const inputNamber = form.elements.number.value;
 
-        if (this.state.contacts.find(contact => contact.name.toLowerCase() === inputName.toLocaleLowerCase())) {
+        if (contacts.find(contact => contact.name.toLowerCase() === inputName.toLocaleLowerCase())) {
             form.reset();
             return window.alert(`${inputName} is already in contacts.`);
         };
 
         const contactObj = {id: nanoid(), name: inputName, number: inputNamber};
-        this.setState(({ contacts }) => ({ contacts: [...contacts, contactObj] }));
+        setContacts(prevState => [...prevState, contactObj]);
         form.reset();
     };
 
-    deleteContact = (contactId) => {
-        this.setState(prevState => ({
-            contacts: prevState.contacts.filter(contact => contact.id !== contactId)
-        }));
+    const deleteContact = (contactId) => {
+        setContacts(contacts.filter(contact => contact.id !== contactId));
     };
 
-    changeFilter = (e) => { 
-        this.setState({filter: e.currentTarget.value})
+    const changeFilter = (e) => { 
+        setFilter(e.currentTarget.value)
     };
 
-    getfiltredContacts = () => {
-        const { filter, contacts } = this.state;
+    const getfiltredContacts = () => {
         return contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()),);
     };
-
-    componentDidMount() {
-        const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
-
-        if (parsedContacts) { 
-            this.setState({ contacts: parsedContacts });
-        };
-        
-    };
-
-    componentDidUpdate(_, prevState) {
-        console.log('Update');
-        if (this.state.contacts !== prevState.contacts) {
-            console.log('LS Usdate');
-            localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-        };
-    };
-
-    render() {
-        
-        const filtredContacts = this.getfiltredContacts();
-
-        return (    
-            <Container>
+    
+    return (
+        <Container>
                 <h1>Phonebook</h1>
                 <FormBox>
                     <ContactForm
-                        onSubmitForm={this.handleSubmit}
+                        onSubmitForm={handleSubmit}
                         inputName={"Name"}
                         inputNumber={"Number"}
                         buttonName={"Add cotact"} />   
                 </FormBox>
                     <h2>Contacts</h2>
                 <ContactsBox>
-                    <Filter inputName={"Find contacts by name"} value={this.state.filter} onChange={this.changeFilter} />
-                    <ContactList contacts={filtredContacts} buttonName={"Delete"} onBtnClick={this.deleteContact} />
+                    <Filter inputName={"Find contacts by name"} value={filter} onChange={changeFilter} />
+                    <ContactList contacts={getfiltredContacts()} buttonName={"Delete"} onBtnClick={deleteContact} />
                 </ContactsBox>
             </Container>
-        );}
-}
-
-export default Phonebook;
+    );
+};
