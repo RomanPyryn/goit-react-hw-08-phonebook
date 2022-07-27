@@ -16,11 +16,12 @@ const ContactList = ({ contacts, buttonName, onBtnClick }) => {
 
 ContactList.propTypes = {
     contacts: PropTypes.arrayOf(PropTypes.shape({
-        name: PropTypes.string,
-        number: PropTypes.string,
+        id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        number: PropTypes.string.isRequired,
     })),
     buttonName: PropTypes.string.isRequired,
-    onBtnClick: PropTypes.func,
+    onBtnClick: PropTypes.func.isRequired,
 };
 
 export default ContactList;

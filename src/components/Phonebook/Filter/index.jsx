@@ -10,9 +10,9 @@ const Filter = ({ inputName, value, onChange }) => (
 );
 
 Filter.propTypes = {
-    onChange: PropTypes.func,
-    inputName: PropTypes.string,
-    value: PropTypes.string,
+    onChange: PropTypes.func.isRequired,
+    inputName: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
 };
 
 export default Filter;

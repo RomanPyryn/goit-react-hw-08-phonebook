@@ -8,13 +8,11 @@ import { Container, FormBox, ContactsBox } from "./Phonebook.styled"
 export default function Phonebook() {
     const [contacts, setContacts] = useState([]);
     const [filter, setFilter] = useState('');
-
     const isFirstRender = useRef(true);
 
     useEffect(() => { 
         const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
 
-        console.log(parsedContacts);
         if (parsedContacts) {
             setContacts(parsedContacts);
         };
