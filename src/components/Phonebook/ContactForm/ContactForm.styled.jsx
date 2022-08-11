@@ -33,8 +33,12 @@ export const PhonebookBtn = styled.button`
   background-color: #fff;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
+  &:hover {
+    background-color: lightgoldenrodyellow;
+    border: 1px solid lightgoldenrodyellow;
+  }
+
   &:active {
-    background-color: aliceblue;
     box-shadow: rgba(0, 0, 0, 0.44) 0px 3px 8px;
   }
 `;
