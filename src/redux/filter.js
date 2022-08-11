@@ -5,13 +5,13 @@ const initialState = {
 };
 
 export const filterSlice = createSlice({
-    name: 'filter',
-    initialState,
-    reducers: {
-        setFilter: (state, action) => {
-            state.value = action.payload;
-        },
+  name: 'filter',
+  initialState,
+  reducers: {
+    setFilter: (state, action) => {
+      state.value = action.payload;
     },
+  },
 });
 
 // Action creators are generated for each case reducer function

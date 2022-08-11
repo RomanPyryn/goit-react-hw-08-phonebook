@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import {
   ContactListUl,
   ContactItem,
-  ContactSpan,
+  ContactInfoContainer,
   ContactBtn,
 } from './ContactList.styled';
 
@@ -11,16 +11,22 @@ const ContactList = ({ contacts, buttonName, onBtnClick }) => {
     <ContactListUl>
       {contacts.map(contact => (
         <ContactItem key={contact.id}>
-          <div>
+          <ContactInfoContainer>
             <img
-              src="https://cdn-icons-png.flaticon.com/512/7980/7980574.png"
+              src="https://cdn-icons-png.flaticon.com/512/64/64572.png"
               alt="contact-icon"
-              width="20px"
-              height="20px"
+              width="15px"
+              height="15px"
             />
-            <ContactSpan>{contact.name}</ContactSpan>
-            <ContactSpan>{contact.number}</ContactSpan>
-          </div>
+            <span>{contact.name}</span>
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/455/455705.png"
+              alt="contact-icon"
+              width="15px"
+              height="15px"
+            />
+            <span>{contact.number}</span>
+          </ContactInfoContainer>
           <ContactBtn type="button" onClick={() => onBtnClick(contact.id)}>
             {buttonName}
           </ContactBtn>
