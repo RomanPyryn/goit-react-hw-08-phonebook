@@ -1,13 +1,16 @@
 import { useState, useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { nanoid } from 'nanoid'
 import ContactForm from "./ContactForm";
 import Filter from "./Filter";
 import ContactList from "./ContactList";
 import { Container, FormBox, ContactsBox } from "./Phonebook.styled"
+import { setFilter } from "redux/filter";
 
 export default function Phonebook() {
+    const filter = useSelector(state => state.filter.value);
+    const dispatch = useDispatch();
     const [contacts, setContacts] = useState([]);
-    const [filter, setFilter] = useState('');
     const isFirstRender = useRef(true);
 
     useEffect(() => { 
@@ -46,8 +49,8 @@ export default function Phonebook() {
         setContacts(contacts.filter(contact => contact.id !== contactId));
     };
 
-    const changeFilter = (e) => { 
-        setFilter(e.currentTarget.value)
+    const changeFilter = (e) => {
+        dispatch(setFilter(e.currentTarget.value));
     };
 
     const getfiltredContacts = () => {
