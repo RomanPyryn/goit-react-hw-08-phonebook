@@ -14,14 +14,6 @@ export default function Phonebook() {
   const dispatch = useDispatch();
   const isFirstRender = useRef(true);
 
-//   useEffect(() => {
-//     const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
-
-//     if (parsedContacts) {
-//       // setContacts(parsedContacts);
-//     }
-//   }, []);
-
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;

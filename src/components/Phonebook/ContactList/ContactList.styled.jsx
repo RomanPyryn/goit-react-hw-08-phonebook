@@ -8,6 +8,8 @@ export const ContactListUl = styled.ul`
 `;
 
 export const ContactItem = styled.li`
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 10px;
 `;
 export const ContactSpan = styled.span`
