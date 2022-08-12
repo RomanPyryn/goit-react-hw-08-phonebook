@@ -64,7 +64,7 @@ export default function Phonebook() {
           onSubmitForm={handleSubmit}
           inputName={'Name'}
           inputNumber={'Number'}
-          buttonName={'Add cotact'}
+          buttonName={'+Add cotact'}
         />
       </FormBox>
       <h2>Contacts</h2>
@@ -76,7 +76,6 @@ export default function Phonebook() {
         />
         <ContactList
           contacts={getfiltredContacts()}
-          buttonName={'Delete'}
           onBtnClick={deleteContact}
         />
       </ContactsBox>

@@ -27,9 +27,7 @@ const ContactList = ({ contacts, buttonName, onBtnClick }) => {
             />
             <span>{contact.number}</span>
           </ContactInfoContainer>
-          <ContactBtn type="button" onClick={() => onBtnClick(contact.id)}>
-            {buttonName}
-          </ContactBtn>
+          <ContactBtn type="button" onClick={() => onBtnClick(contact.id)} />
         </ContactItem>
       ))}
     </ContactListUl>
