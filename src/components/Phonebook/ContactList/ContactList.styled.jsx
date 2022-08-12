@@ -39,15 +39,16 @@ export const ContactBtn = styled.button`
   background-size: cover;
   border: none;
   background-color: transparent;
-  outline: none;  
+  outline: none;
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     transform: scale(1.1);
 
     transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
-   }
+  }
 
-   &:active {
+  &:active {
     transform: scale(0.95);
 
     transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1);

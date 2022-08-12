@@ -1,4 +1,6 @@
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import { nanoid } from 'nanoid';
+import { addItem } from 'redux/items';
 import {
   PhonebookContainer,
   PhonebookForm,
@@ -7,12 +9,35 @@ import {
   PhonebookInput,
 } from './ContactForm.styled';
 
-const ContactForm = ({ onSubmitForm, inputName, inputNumber, buttonName }) => {
+const ContactForm = () => {
+  const contacts = useSelector(state => state.items.contacts);
+  const dispatch = useDispatch();
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const inputName = form.elements.name.value;
+    const inputNamber = form.elements.number.value;
+
+    if (
+      contacts.find(
+        contact => contact.name.toLowerCase() === inputName.toLocaleLowerCase()
+      )
+    ) {
+      form.reset();
+      return window.alert(`${inputName} is already in contacts.`);
+    }
+
+    const contactObj = { id: nanoid(), name: inputName, number: inputNamber };
+    dispatch(addItem(contactObj));
+    form.reset();
+  };
+
   return (
     <PhonebookContainer>
-      <PhonebookForm onSubmit={onSubmitForm}>
+      <PhonebookForm onSubmit={handleSubmit}>
         <PhonebookLabel htmlFor="">
-          {inputName}
+          Name
           <PhonebookInput
             type="text"
             name="name"
@@ -23,7 +48,7 @@ const ContactForm = ({ onSubmitForm, inputName, inputNumber, buttonName }) => {
         </PhonebookLabel>
 
         <PhonebookLabel htmlFor="">
-          {inputNumber}
+          Number
           <PhonebookInput
             type="tel"
             name="number"
@@ -33,7 +58,7 @@ const ContactForm = ({ onSubmitForm, inputName, inputNumber, buttonName }) => {
           />
         </PhonebookLabel>
 
-        <PhonebookBtn type="submit">{buttonName}</PhonebookBtn>
+        <PhonebookBtn type="submit">+Add Contact</PhonebookBtn>
       </PhonebookForm>
       <img
         src="https://cdn-icons-png.flaticon.com/512/1485/1485097.png"
@@ -42,13 +67,6 @@ const ContactForm = ({ onSubmitForm, inputName, inputNumber, buttonName }) => {
       />
     </PhonebookContainer>
   );
-};
-
-ContactForm.propTypes = {
-  onSubmitForm: PropTypes.func.isRequired,
-  inputName: PropTypes.string.isRequired,
-  inputNumber: PropTypes.string.isRequired,
-  buttonName: PropTypes.string.isRequired,
 };
 
 export default ContactForm;

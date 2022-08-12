@@ -40,7 +40,8 @@ export const PhonebookBtn = styled.button`
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   transform: scale(1);
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: lightgoldenrodyellow;
 
     transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
