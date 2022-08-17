@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import { removeItem } from 'redux/items';
 import {
   ContactListUl,
@@ -12,8 +13,9 @@ const ContactList = () => {
   const contacts = useSelector(state => state.items.contacts);
   const dispatch = useDispatch();
 
-  const deleteContact = contactId => {
+  const deleteContact = (contactId, contactName) => {
     dispatch(removeItem(contactId));
+    toast.info(`"${contactName}" deleted from your contacts!`);
   };
 
   const getfiltredContacts = () => {
@@ -42,7 +44,10 @@ const ContactList = () => {
             />
             <span>{contact.number}</span>
           </ContactInfoContainer>
-          <ContactBtn type="button" onClick={() => deleteContact(contact.id)} />
+          <ContactBtn
+            type="button"
+            onClick={() => deleteContact(contact.id, contact.name)}
+          />
         </ContactItem>
       ))}
     </ContactListUl>

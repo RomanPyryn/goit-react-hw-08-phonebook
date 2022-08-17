@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import { nanoid } from 'nanoid';
 import { addItem } from 'redux/items';
 import {
@@ -24,12 +25,12 @@ const ContactForm = () => {
         contact => contact.name.toLowerCase() === inputName.toLocaleLowerCase()
       )
     ) {
-      form.reset();
-      return window.alert(`${inputName} is already in contacts.`);
+      return toast.warn(`"${inputName}" is already in contacts.`);
     }
 
     const contactObj = { id: nanoid(), name: inputName, number: inputNamber };
     dispatch(addItem(contactObj));
+    toast.success(`"${inputName}" added to your contacts!`);
     form.reset();
   };
 
