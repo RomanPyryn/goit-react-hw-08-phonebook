@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-// import { removeItem } from 'redux/items';
 import { fetchItems, removeItem } from '../../../redux/itemsApi';
 import {
   ContactListUl,
@@ -12,7 +11,7 @@ import {
 
 const ContactList = () => {
   const filter = useSelector(state => state.filter.value);
-  const {contacts, isLoading, error} = useSelector(state => state.items);
+  const { contacts, isLoading, error } = useSelector(state => state.items);
   const dispatch = useDispatch();
 
   console.log(contacts);

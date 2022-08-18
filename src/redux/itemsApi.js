@@ -35,17 +35,17 @@ export const fetchItems = () => async dispatch => {
 
 export const addItem = () => async dispatch => {
   try {
-      const s = await postItem();
-      console.log(s)
-      dispatch(fetchItems());
+    const s = await postItem();
+    console.log(s);
+    dispatch(fetchItems());
   } catch (error) {
-      console.log(error)
+    console.log(error);
     dispatch(fetchItemsFailure(error.message));
-    };
+  }
 };
 
 export const removeItem = itemId => async dispatch => {
-    try {
+  try {
     await deleteItem(itemId);
     dispatch(fetchItems());
   } catch (error) {

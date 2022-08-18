@@ -10,7 +10,7 @@ export const itemsSlice = createSlice({
   name: 'items',
   initialState,
   reducers: {
-    fetchItemsRequest: (state) => {
+    fetchItemsRequest: state => {
       state.isLoading = true;
     },
     fetchItemsSuccess: (state, action) => {
@@ -25,6 +25,11 @@ export const itemsSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { fetchItemsRequest, fetchItemsSuccess, fetchItemsFailure, addItem } = itemsSlice.actions;
+export const {
+  fetchItemsRequest,
+  fetchItemsSuccess,
+  fetchItemsFailure,
+  addItem,
+} = itemsSlice.actions;
 
 export default itemsSlice.reducer;

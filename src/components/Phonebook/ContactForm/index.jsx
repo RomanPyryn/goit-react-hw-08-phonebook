@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { nanoid } from 'nanoid';
 import { addItem } from '../../../redux/itemsApi';
-// import { addItem } from 'redux/items';
 import {
   PhonebookContainer,
   PhonebookForm,
@@ -28,7 +27,7 @@ const ContactForm = () => {
     ) {
       return toast.warn(`"${inputName}" is already in contacts.`);
     }
-const contactObj = { id: nanoid(), name: inputName, phone: inputNamber }
+    const contactObj = { id: nanoid(), name: inputName, phone: inputNamber };
     // const contactObj = JSON.stringify({ id: nanoid(), name: inputName, phone: inputNamber });
     console.log(contactObj);
 
