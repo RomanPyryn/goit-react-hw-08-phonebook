@@ -14,8 +14,6 @@ const ContactList = () => {
   const { contacts, isLoading, error } = useSelector(state => state.items);
   const dispatch = useDispatch();
 
-  console.log(contacts);
-
   const deleteContact = (contactId, contactName) => {
     dispatch(removeItem(contactId));
     toast.info(`"${contactName}" deleted from your contacts!`);

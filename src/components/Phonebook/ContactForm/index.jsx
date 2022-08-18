@@ -28,8 +28,6 @@ const ContactForm = () => {
       return toast.warn(`"${inputName}" is already in contacts.`);
     }
     const contactObj = { id: nanoid(), name: inputName, phone: inputNamber };
-    // const contactObj = JSON.stringify({ id: nanoid(), name: inputName, phone: inputNamber });
-    console.log(contactObj);
 
     const addContact = contactObj => {
       dispatch(addItem(contactObj));
