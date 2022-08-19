@@ -1,12 +1,13 @@
+import { TailSpin } from 'react-loader-spinner';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { toast } from 'react-toastify';
 import { fetchItems, removeItem } from '../../../redux/itemsApi';
 import {
   ContactListUl,
   ContactItem,
   ContactInfoContainer,
   ContactBtn,
+  SpinerBox,
 } from './ContactList.styled';
 
 const ContactList = () => {
@@ -14,9 +15,8 @@ const ContactList = () => {
   const { contacts, isLoading, error } = useSelector(state => state.items);
   const dispatch = useDispatch();
 
-  const deleteContact = (contactId, contactName) => {
+  const deleteContact = contactId => {
     dispatch(removeItem(contactId));
-    toast.info(`"${contactName}" deleted from your contacts!`);
   };
 
   const getfiltredContacts = () => {
@@ -33,7 +33,9 @@ const ContactList = () => {
     <>
       {error && <p>{error}</p>}
       {isLoading ? (
-        <p>Loading...</p>
+        <SpinerBox>
+          <TailSpin color="#000" height={25} width={25} />
+        </SpinerBox>
       ) : (
         <ContactListUl>
           {getfiltredContacts().map(contact => (
@@ -57,7 +59,7 @@ const ContactList = () => {
               <ContactBtn
                 type="button"
                 onClick={() => deleteContact(contact.id, contact.name)}
-                disabled={!contacts}
+                disabled={isLoading}
               />
             </ContactItem>
           ))}

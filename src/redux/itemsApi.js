@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import {
   fetchItemsRequest,
   fetchItemsSuccess,
@@ -17,6 +18,7 @@ export const fetchItems = () => async dispatch => {
     dispatch(fetchItemsSuccess(items));
   } catch (error) {
     dispatch(fetchItemsFailure(error.message));
+    toast.error('Sorry! Something went wrong.');
   }
 };
 
@@ -26,8 +28,10 @@ export const addItem = item => async dispatch => {
   try {
     await response.data;
     dispatch(fetchItems());
+    toast.success(`"${item.name}" added to your contacts!`);
   } catch (error) {
     dispatch(fetchItemsFailure(error.message));
+    toast.error('Sorry! Something went wrong.');
   }
 };
 
@@ -35,9 +39,11 @@ export const removeItem = itemId => async dispatch => {
   const response = await axios.delete(`${BASE_URL}/${itemId}`);
 
   try {
-    await response.data;
+    const item = await response.data;
     dispatch(fetchItems());
+    toast.info(`"${item.name}" deleted from your contacts!`);
   } catch (error) {
     dispatch(fetchItemsFailure(error.message));
+    toast.error('Sorry! Something went wrong.');
   }
 };

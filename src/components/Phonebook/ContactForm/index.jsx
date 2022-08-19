@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { nanoid } from 'nanoid';
+import { TailSpin } from 'react-loader-spinner';
 import { addItem } from '../../../redux/itemsApi';
 import {
   PhonebookContainer,
@@ -8,10 +9,11 @@ import {
   PhonebookLabel,
   PhonebookBtn,
   PhonebookInput,
+  SpinerBox,
 } from './ContactForm.styled';
 
 const ContactForm = () => {
-  const contacts = useSelector(state => state.items.contacts);
+  const { contacts, isLoading } = useSelector(state => state.items);
   const dispatch = useDispatch();
 
   const handleSubmit = e => {
@@ -31,7 +33,6 @@ const ContactForm = () => {
 
     const addContact = contactObj => {
       dispatch(addItem(contactObj));
-      toast.success(`"${inputName}" added to your contacts!`);
       form.reset();
     };
     addContact(contactObj);
@@ -62,7 +63,15 @@ const ContactForm = () => {
           />
         </PhonebookLabel>
 
-        <PhonebookBtn type="submit">+Add Contact</PhonebookBtn>
+        <PhonebookBtn type="submit" disabled={isLoading}>
+          {isLoading ? (
+            <SpinerBox>
+              <TailSpin color="#000" height={16} width={16} />
+            </SpinerBox>
+          ) : (
+            '+Add Contact'
+          )}
+        </PhonebookBtn>
       </PhonebookForm>
       <img
         src="https://cdn-icons-png.flaticon.com/512/1485/1485097.png"
