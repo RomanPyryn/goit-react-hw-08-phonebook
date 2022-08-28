@@ -32,7 +32,7 @@ const ContactList = () => {
   return (
     <>
       {error && <p>{error}</p>}
-      {isLoading ? (
+      {!contacts ? (
         <SpinerBox>
           <TailSpin color="#000" height={25} width={25} />
         </SpinerBox>

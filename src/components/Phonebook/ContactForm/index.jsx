@@ -13,10 +13,10 @@ import {
 } from './ContactForm.styled';
 
 const ContactForm = () => {
-  const { contacts, isLoading } = useSelector(state => state.items);
+  const { contacts, isLoading, isSuccess } = useSelector(state => state.items);
   const dispatch = useDispatch();
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const form = e.currentTarget;
     const inputName = form.elements.name.value;
@@ -31,11 +31,10 @@ const ContactForm = () => {
     }
     const contactObj = { id: nanoid(), name: inputName, phone: inputNamber };
 
-    const addContact = contactObj => {
-      dispatch(addItem(contactObj));
+    await dispatch(addItem(contactObj));
+    if (isSuccess) {
       form.reset();
-    };
-    addContact(contactObj);
+    }
   };
 
   return (
