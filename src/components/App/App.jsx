@@ -1,12 +1,26 @@
-import Phonebook from '../Phonebook';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { lazy, Suspense } from 'react';
+import { Routes, Route } from 'react-router-dom';
+
+const Layout = lazy(() => import('components/Layout'));
+const Phonebook = lazy(() => import('components/Phonebook'));
+const LogIn = lazy(() => import('../../views/LogIn'));
+const Registration = lazy(() => import('../../views/Registration'));
+const NotFound = lazy(() => import('components/NotFound'));
+
+// import Phonebook from '../Phonebook';
 
 export const App = () => {
   return (
-    <>
-      <Phonebook />
-      <ToastContainer position="top-center" autoClose={3000} theme="dark" />
-    </>
+    <Suspense>
+       {/* fallback={<Loader />} */}
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Phonebook />} />
+          <Route path="log-in" element={<LogIn />} />
+          <Route path="registration" element={<Registration />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 };
