@@ -2,22 +2,21 @@ import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 const Layout = lazy(() => import('components/Layout'));
-const Loader = lazy(() => import('components/Loader'));
+// const Loader = lazy(() => import('components/Loader'));
 const Phonebook = lazy(() => import('components/Phonebook'));
-const LogIn = lazy(() => import('../../views/LogIn'));
-const Registration = lazy(() => import('../../views/Registration'));
+const Login = lazy(() => import('../../views/Login'));
+const Register = lazy(() => import('../../views/Register'));
 const NotFound = lazy(() => import('components/NotFound'));
-
-// import Phonebook from '../Phonebook';
 
 export const App = () => {
   return (
-    <Suspense fallback={<Loader />}>
+    <Suspense>
+      {/* fallback={<Loader />} */}
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Phonebook />} />
-          <Route path="log-in" element={<LogIn />} />
-          <Route path="registration" element={<Registration />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

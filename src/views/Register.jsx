@@ -1,4 +1,4 @@
-const Registration = () => {
+const Register = () => {
   return (
     <>
           <form action="">
@@ -20,4 +20,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default Register;

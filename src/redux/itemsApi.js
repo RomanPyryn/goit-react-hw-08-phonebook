@@ -6,12 +6,13 @@ import {
   fetchItemsFailure,
 } from 'redux/items';
 
-const BASE_URL = 'https://62fdfbf5a85c52ee482d0646.mockapi.io/api/v1/contacts';
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
+//  Get user contacts
 export const fetchItems = () => async dispatch => {
   dispatch(fetchItemsRequest());
 
-  const response = await axios(BASE_URL);
+  const response = await axios('/contacts');
 
   try {
     const items = await response.data;
@@ -22,8 +23,10 @@ export const fetchItems = () => async dispatch => {
   }
 };
 
+
+//  Add new contact 
 export const addItem = item => async dispatch => {
-  const response = await axios.post(BASE_URL, item);
+  const response = await axios.post('/contacts', item);
 
   try {
     await response.data;
@@ -35,13 +38,30 @@ export const addItem = item => async dispatch => {
   }
 };
 
+
+//  Delete contact
 export const removeItem = itemId => async dispatch => {
-  const response = await axios.delete(`${BASE_URL}/${itemId}`);
+  const response = await axios.delete(`/contacts/${itemId}`);
 
   try {
     const item = await response.data;
     dispatch(fetchItems());
     toast.info(`"${item.name}" deleted from your contacts!`);
+  } catch (error) {
+    dispatch(fetchItemsFailure(error.message));
+    toast.error('Sorry! Something went wrong.');
+  }
+};
+
+
+//  Edit contact
+export const editItem = (item, itemId) => async dispatch => {
+  const response = await axios.patch(`/contacts/${itemId}`, item);
+
+  try {
+    const item = await response.data;
+    dispatch(fetchItems());
+    toast.info(`"${item.name}" edited!`);
   } catch (error) {
     dispatch(fetchItemsFailure(error.message));
     toast.error('Sorry! Something went wrong.');

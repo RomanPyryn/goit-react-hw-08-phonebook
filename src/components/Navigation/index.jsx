@@ -7,10 +7,10 @@ const Navigation = () => {
     <NavBox>
       <p>Phonebook</p>
       <NavLinksBox>
-        <NavLink to="registration" className={'link'}>
+        <NavLink to="register" className={'link'}>
           Registration
         </NavLink>
-        <NavLink to="log-in" className={'link'}>
+        <NavLink to="login" className={'link'}>
           Log in
         </NavLink>
       </NavLinksBox>

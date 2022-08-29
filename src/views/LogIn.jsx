@@ -1,4 +1,4 @@
-const LogIn = () => {
+const Login = () => {
   return (
     <>
           <form action="">
@@ -16,4 +16,4 @@ const LogIn = () => {
   );
 };
 
-export default LogIn;
+export default Login;
