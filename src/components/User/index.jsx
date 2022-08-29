@@ -1,9 +1,12 @@
+import { useSelector } from 'react-redux';
 import { UserBox } from './User.styled';
 
 const User = () => {
+  const user = useSelector(state => state.auth.user.name);
+
   return (
     <UserBox>
-          <p>User</p>
+          <p>{user}</p>
           <button>Exit</button>
     </UserBox>
   );

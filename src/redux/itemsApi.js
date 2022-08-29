@@ -23,8 +23,7 @@ export const fetchItems = () => async dispatch => {
   }
 };
 
-
-//  Add new contact 
+//  Add new contact
 export const addItem = item => async dispatch => {
   const response = await axios.post('/contacts', item);
 
@@ -37,7 +36,6 @@ export const addItem = item => async dispatch => {
     toast.error('Sorry! Something went wrong.');
   }
 };
-
 
 //  Delete contact
 export const removeItem = itemId => async dispatch => {
@@ -52,7 +50,6 @@ export const removeItem = itemId => async dispatch => {
     toast.error('Sorry! Something went wrong.');
   }
 };
-
 
 //  Edit contact
 export const editItem = (item, itemId) => async dispatch => {

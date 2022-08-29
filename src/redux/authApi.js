@@ -4,7 +4,7 @@ import {
   fetchUserRequest,
   fetchUserSuccess,
   fetchUserFailure,
-} from 'redux/items';
+} from 'redux/auth';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
@@ -23,21 +23,20 @@ export const getUser = () => async dispatch => {
   }
 };
 
-
 //  Add new user
 export const addUser = user => async dispatch => {
   const response = await axios.post('/users/signup', user);
 
   try {
-    await response.data;
-    dispatch(getUser());
-    toast.success(`Welcome, "${user.name}"! You have successfully registered.`);
+    const user = await response.data;
+    dispatch(fetchUserSuccess(user));
+    // dispatch(getUser());
+    toast.success(`Welcome, "${user.user.name}"! You have successfully registered.`);
   } catch (error) {
     dispatch(fetchUserFailure(error.message));
     toast.error('Sorry! Something went wrong.');
   }
 };
-
 
 //  Log IN user
 export const loginUser = user => async dispatch => {
@@ -45,14 +44,16 @@ export const loginUser = user => async dispatch => {
 
   try {
     const user = await response.data;
-    dispatch(getUser());
-    toast.success(`Hi, "${user.name}"! You are successfully logged in.`);
+    dispatch(fetchUserSuccess(user));
+    // dispatch(getUser());
+    await toast.success(
+      `Hi, "${user.user.name}"! You are successfully logged in.`
+    );
   } catch (error) {
     dispatch(fetchUserFailure(error.message));
     toast.error('Sorry! Something went wrong.');
   }
 };
-
 
 //  Log OUT user
 export const logoutUser = () => async dispatch => {
