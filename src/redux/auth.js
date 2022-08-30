@@ -5,7 +5,6 @@ const initialState = {
   token: null,
   isLoggedIn: false,
   isLoading: false,
-  isSuccess: false,
   error: '',
 };
 
@@ -15,7 +14,6 @@ export const authSlice = createSlice({
   reducers: {
     fetchUserRequest: state => {
       state.isLoading = true;
-      state.isSuccess = false;
       state.isLoggedIn = false;
     },
     fetchUserSuccess: (state, action) => {
@@ -23,19 +21,33 @@ export const authSlice = createSlice({
       state.token = action.payload.token;
       state.isLoggedIn = true;
       state.isLoading = false;
-      state.isSuccess = true;
     },
     fetchUserFailure: (state, action) => {
       state.error = action.payload;
       state.isLoading = false;
-      state.isSuccess = false;
       state.isLoggedIn = false;
+    },
+    fetchUserLogOutSuccess: state => {
+      state.user = { name: '', email: '' };
+      state.token = null;
+      state.isLoading = false;
+      state.isLoggedIn = false;
+    },
+    fetchCurrentUserSuccess: (state, action) => {
+      state.user = { ...action.payload };
+      state.isLoggedIn = true;
+      state.isLoading = false;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { fetchUserRequest, fetchUserSuccess, fetchUserFailure } =
-  authSlice.actions;
+export const {
+  fetchUserRequest,
+  fetchUserSuccess,
+  fetchUserFailure,
+  fetchUserLogOutSuccess,
+  fetchCurrentUserSuccess,
+} = authSlice.actions;
 
 export default authSlice.reducer;

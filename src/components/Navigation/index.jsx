@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import User from 'components/User';
+import UserMenu from 'components/UserMenu';
 import { NavBox, NavLinksBox } from './Navigation.styled';
 import { useSelector } from 'react-redux';
 
@@ -19,7 +19,7 @@ const Navigation = () => {
           </NavLink>
         </NavLinksBox>
       ) : (
-        <User />
+        <UserMenu />
       )}
     </NavBox>
   );

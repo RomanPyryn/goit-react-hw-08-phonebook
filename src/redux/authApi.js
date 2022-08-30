@@ -4,19 +4,38 @@ import {
   fetchUserRequest,
   fetchUserSuccess,
   fetchUserFailure,
+  fetchUserLogOutSuccess,
+  fetchCurrentUserSuccess,
 } from 'redux/auth';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
+const token = {
+  set(token) {
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  },
+  unset() {
+    axios.defaults.headers.common.Authorization = '';
+  },
+};
+
 //  Get info about user
-export const getUser = () => async dispatch => {
+export const getUser = () => async (dispatch, getState) => {
+  const persistedToken = getState().auth.token;
+
+  if (!persistedToken) {
+    return getState();
+  }
+
+  token.set(persistedToken);
+
   dispatch(fetchUserRequest());
 
   const response = await axios('/users/current');
 
   try {
     const user = await response.data;
-    dispatch(fetchUserSuccess(user));
+    dispatch(fetchCurrentUserSuccess(user));
   } catch (error) {
     dispatch(fetchUserFailure(error.message));
     toast.error('Sorry! Something went wrong.');
@@ -29,9 +48,11 @@ export const addUser = user => async dispatch => {
 
   try {
     const user = await response.data;
+    token.set(user.token);
     dispatch(fetchUserSuccess(user));
-    // dispatch(getUser());
-    toast.success(`Welcome, "${user.user.name}"! You have successfully registered.`);
+    toast.success(
+      `Welcome, "${user.user.name}"! You have successfully registered.`
+    );
   } catch (error) {
     dispatch(fetchUserFailure(error.message));
     toast.error('Sorry! Something went wrong.');
@@ -44,8 +65,8 @@ export const loginUser = user => async dispatch => {
 
   try {
     const user = await response.data;
+    token.set(user.token);
     dispatch(fetchUserSuccess(user));
-    // dispatch(getUser());
     await toast.success(
       `Hi, "${user.user.name}"! You are successfully logged in.`
     );
@@ -62,8 +83,9 @@ export const logoutUser = () => async dispatch => {
   const response = await axios.post('/users/logout');
 
   try {
-    const user = await response.data;
-    toast.success(`See you soon, "${user.name}"!`);
+    await response.data;
+    token.unset();
+    dispatch(fetchUserLogOutSuccess());
   } catch (error) {
     dispatch(fetchUserFailure(error.message));
     toast.error('Sorry! Something went wrong.');

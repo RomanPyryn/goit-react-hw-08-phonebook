@@ -1,5 +1,8 @@
+import { useEffect } from 'react';
 import { lazy, Suspense } from 'react';
+import { useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
+import { getUser } from '../../redux/authApi';
 
 const Layout = lazy(() => import('components/Layout'));
 // const Loader = lazy(() => import('components/Loader'));
@@ -9,6 +12,12 @@ const Register = lazy(() => import('../../views/Register'));
 const NotFound = lazy(() => import('components/NotFound'));
 
 export const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUser());
+  }, [dispatch]);
+
   return (
     <Suspense>
       {/* fallback={<Loader />} */}

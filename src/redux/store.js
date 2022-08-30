@@ -1,7 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import items from './items';
 import filter from './filter';
-import auth from './auth';
+import authReducer from './auth';
+import storage from 'redux-persist/lib/storage';
 import {
   persistStore,
   persistReducer,
@@ -12,17 +13,16 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
 
 const persistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['token']
+  whitelist: ['token'],
 };
 
 export const store = configureStore({
   reducer: {
-    auth: persistReducer(persistConfig, auth),
+    auth: persistReducer(persistConfig, authReducer),
     items,
     filter,
   },
