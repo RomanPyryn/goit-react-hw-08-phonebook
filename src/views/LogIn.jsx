@@ -26,6 +26,7 @@ const Login = () => {
   };
   return (
     <>
+      <h1>Log in</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="">
           Email
