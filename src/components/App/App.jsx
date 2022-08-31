@@ -7,8 +7,8 @@ import { getUser } from '../../redux/authApi';
 const Layout = lazy(() => import('components/Layout'));
 // const Loader = lazy(() => import('components/Loader'));
 const Phonebook = lazy(() => import('components/Phonebook'));
-const Login = lazy(() => import('../../views/Login'));
-const Register = lazy(() => import('../../views/Register'));
+const Login = lazy(() => import('../../views/Login.jsx'));
+const Register = lazy(() => import('../../views/Register.jsx'));
 const NotFound = lazy(() => import('components/NotFound'));
 
 export const App = () => {
