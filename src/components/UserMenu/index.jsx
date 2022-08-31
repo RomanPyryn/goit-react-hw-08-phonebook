@@ -11,9 +11,9 @@ const User = () => {
     await dispatch(logoutUser());
     toast.success(`See you soon, "${user.name}"!`);
 
-    // if (!isLoggedIn) {
-    //   toast.success(`See you soon, "${user.name}"!`);
-    // }
+    if (!isLoggedIn) {
+      toast.success(`See you soon, "${user.name}"!`);
+    }
   };
 
   return (
