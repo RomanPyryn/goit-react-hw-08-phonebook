@@ -1,24 +1,22 @@
 import styled from '@emotion/styled';
 
 export const FilterBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 250px;
-  font-size: 22px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 30px;
 `;
 
 export const FilterLabel = styled.label`
-  display: inline-flex;
-  flex-direction: column;
-  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 `;
 
 export const FilterInput = styled.input`
+  width: 200px;
   outline: none;
   padding: 5px;
-  margin-top: 5px;
   border: 1px solid aliceblue;
-  border-radius: 2px;
+  border-radius: 4px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;

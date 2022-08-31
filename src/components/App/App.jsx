@@ -9,8 +9,8 @@ import { getUser } from '../../redux/authApi';
 const Layout = lazy(() => import('components/Layout'));
 // const Loader = lazy(() => import('components/Loader'));
 const Contacts = lazy(() => import('components/Phonebook'));
-const LogIn = lazy(() => import('../../views/LogIn.jsx'));
-const Register = lazy(() => import('../../views/Register.jsx'));
+const Login = lazy(() => import('../Authorization/Login/index.jsx'));
+const Register = lazy(() => import('../Authorization/Register/index.jsx'));
 const NotFound = lazy(() => import('components/NotFound'));
 
 export const App = () => {
@@ -47,7 +47,7 @@ export const App = () => {
             path="login"
             element={
               <PublicRoute restricted>
-                <LogIn />
+                <Login />
               </PublicRoute>
             }
           />

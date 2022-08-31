@@ -1,23 +1,26 @@
 import styled from '@emotion/styled';
 
 export const Container = styled.section`
-  width: 1200px;
+  width: 500px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 30px;
+  background-color: aliceblue;
+  border: 2px solid lightblue;
+  border-radius: 6px;
 `;
 
 export const FormBox = styled.div`
-  width: 400px;
   padding: 10px 10px 15px;
-  background-color: aliceblue;
-  border: 1px solid lightblue;
-  border-radius: 1px;
 `;
 
 export const ContactsBox = styled.div`
-  width: 400px;
-  padding: 10px;
-  background-color: aliceblue;
-  border: 1px solid lightblue;
-  border-radius: 1px;
+  padding: 0 15px;
+`;
+
+export const ContactsHeader = styled.h1`
+  margin: 30px 0 20px;
+  text-align: center;
+  color: #007bcd;
+  text-shadow: 1px 1px 3px #2c2c2c;
 `;

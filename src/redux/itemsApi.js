@@ -42,9 +42,8 @@ export const removeItem = itemId => async dispatch => {
   const response = await axios.delete(`/contacts/${itemId}`);
 
   try {
-    const item = await response.data;
+    await response.data;
     dispatch(fetchItems());
-    toast.info(`"${item.name}" deleted from your contacts!`);
   } catch (error) {
     dispatch(fetchItemsFailure(error.message));
     toast.error('Sorry! Something went wrong.');

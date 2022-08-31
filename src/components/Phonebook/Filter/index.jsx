@@ -13,8 +13,8 @@ const Filter = () => {
   return (
     <FilterBox>
       <FilterLabel htmlFor="">
-        Find contacts by name
         <FilterInput type="text" value={filter} onChange={changeFilter} />
+        Find contacts by name
       </FilterLabel>
     </FilterBox>
   );

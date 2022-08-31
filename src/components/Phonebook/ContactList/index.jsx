@@ -1,6 +1,7 @@
 import { TailSpin } from 'react-loader-spinner';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
 import { fetchItems, removeItem } from '../../../redux/itemsApi';
 import {
   ContactListUl,
@@ -15,8 +16,9 @@ const ContactList = () => {
   const { contacts, isLoading, error } = useSelector(state => state.items);
   const dispatch = useDispatch();
 
-  const deleteContact = contactId => {
+  const deleteContact = (contactId, contactName) => {
     dispatch(removeItem(contactId));
+    toast.info(`"${contactName}" deleted from your contacts!`);
   };
 
   const getfiltredContacts = () => {
