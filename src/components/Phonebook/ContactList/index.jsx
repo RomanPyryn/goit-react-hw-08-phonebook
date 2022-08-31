@@ -54,7 +54,7 @@ const ContactList = () => {
                   width="15px"
                   height="15px"
                 />
-                <span>{contact.phone}</span>
+                <span>{contact.number}</span>
               </ContactInfoContainer>
               <ContactBtn
                 type="button"
