@@ -25,6 +25,8 @@ export const fetchItems = () => async dispatch => {
 
 //  Add new contact
 export const addItem = item => async dispatch => {
+  dispatch(fetchItemsRequest());
+  
   const response = await axios.post('/contacts', item);
 
   try {
@@ -39,6 +41,8 @@ export const addItem = item => async dispatch => {
 
 //  Delete contact
 export const removeItem = itemId => async dispatch => {
+  dispatch(fetchItemsRequest());
+
   const response = await axios.delete(`/contacts/${itemId}`);
 
   try {

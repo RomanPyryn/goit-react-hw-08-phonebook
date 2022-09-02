@@ -5,6 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import PublicRoute from 'components/Routes/PublicRoute';
 import PrivateRoute from 'components/Routes/PrivateRoute';
 import { getUser } from '../../redux/authApi';
+import Loader from 'components/Loader';
 
 const Layout = lazy(() => import('components/Layout'));
 // const Loader = lazy(() => import('components/Loader'));
@@ -21,8 +22,7 @@ export const App = () => {
   }, [dispatch]);
 
   return (
-    <Suspense>
-      {/* fallback={<Loader />} */}
+    <Suspense fallback={<Loader />}>
       <Routes>
         <Route path="/" element={<PublicRoute>
                 <Layout />

@@ -44,36 +44,40 @@ export const getUser = () => async (dispatch, getState) => {
 
 //  Add new user
 export const addUser = user => async dispatch => {
-  const response = await axios.post('/users/signup', user);
+  dispatch(fetchUserRequest());
 
-  try {
-    const user = await response.data;
-    token.set(user.token);
-    dispatch(fetchUserSuccess(user));
-    toast.success(
-      `Welcome, "${user.user.name}"! You have successfully registered.`
-    );
-  } catch (error) {
-    dispatch(fetchUserFailure(error.message));
-    toast.error('Sorry! Something went wrong.');
-  }
+  axios
+    .post('/users/signup', user)
+    .then(res => {
+      token.set(res.data.token);
+      dispatch(fetchUserSuccess(res.data));
+      toast.success(
+        `Welcome, "${res.data.user.name}"! You are successfully registered.`
+      );
+    })
+    .catch(err => {
+      dispatch(fetchUserFailure(err.message));
+      toast.error('User with this name or email is already registered.');
+    });
 };
 
 //  Log IN user
-export const loginUser = user => async dispatch => {
-  const response = await axios.post('/users/login', user);
+export const loginUser = user => dispatch => {
+  dispatch(fetchUserRequest());
 
-  try {
-    const user = await response.data;
-    token.set(user.token);
-    dispatch(fetchUserSuccess(user));
-    await toast.success(
-      `Hi, "${user.user.name}"! You are successfully logged in.`
-    );
-  } catch (error) {
-    dispatch(fetchUserFailure(error.message));
-    toast.error('Sorry! Something went wrong.');
-  }
+  axios
+    .post('/users/login', user)
+    .then(res => {
+      token.set(res.data.token);
+      dispatch(fetchUserSuccess(res.data));
+      toast.success(
+        `Hi, "${res.data.user.name}"! You are successfully logged in.`
+      );
+    })
+    .catch(err => {
+      dispatch(fetchUserFailure(err.message));
+      toast.error('Try to enter correct name and email or register.');
+    });
 };
 
 //  Log OUT user

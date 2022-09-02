@@ -1,10 +1,20 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { TailSpin } from 'react-loader-spinner';
 import { addUser } from '../../../redux/authApi';
-import { AuthBox, AuthHeader, AuthForm, AuthLabel, AuthInput, AuthBtn } from '../Authorization.styled';
+import {
+  AuthBox,
+  AuthHeader,
+  AuthForm,
+  AuthLabel,
+  AuthInput,
+  AuthBtn,
+  SpinerBox,
+} from '../Authorization.styled';
 
 const Register = () => {
   const dispatch = useDispatch();
+  const { isLoading } = useSelector(state => state.auth);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,19 +35,21 @@ const Register = () => {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(addUser({ name, email, password }));
-    setName('');
-    setEmail('');
-    setPassword('');
   };
 
   return (
     <AuthBox>
       <AuthHeader>Registration</AuthHeader>
 
-      <AuthForm onSubmit={handleSubmit} autoComplete="off" >
+      <AuthForm onSubmit={handleSubmit} autoComplete="off">
         <AuthLabel htmlFor="">
           Name
-          <AuthInput type="text" name="name" value={name} onChange={handleChange} />
+          <AuthInput
+            type="text"
+            name="name"
+            value={name}
+            onChange={handleChange}
+          />
         </AuthLabel>
         <AuthLabel htmlFor="">
           Email
@@ -57,7 +69,15 @@ const Register = () => {
             onChange={handleChange}
           />
         </AuthLabel>
-        <AuthBtn type="submit">Registration</AuthBtn>
+        <AuthBtn type="submit" disabled={isLoading}>
+          {isLoading ? (
+            <SpinerBox>
+              <TailSpin color="#000" height={16} width={16} />
+            </SpinerBox>
+          ) : (
+            'Registration'
+          )}
+        </AuthBtn>
       </AuthForm>
     </AuthBox>
   );

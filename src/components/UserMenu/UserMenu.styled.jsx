@@ -22,7 +22,7 @@ export const LogoutBtn = styled.button`
   border-radius: 2px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   transform: scale(1);
-  
+
   &:hover,
   &:focus {
     background-color: aliceblue;
@@ -44,4 +44,9 @@ export const LogoutBtn = styled.button`
   &.active {
     color: #007bcd;
   }
+`;
+
+export const SpinerBox = styled.div`
+  display: flex;
+  justify-content: center;
 `;
