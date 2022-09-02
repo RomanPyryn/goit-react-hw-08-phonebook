@@ -3,18 +3,23 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { fetchItems, removeItem } from '../../../redux/itemsApi';
+import ContactEdit from '../ContactEdit';
 import {
   ContactListUl,
   ContactItem,
   ContactInfoContainer,
-  ContactBtn,
+  ContactEditBtn,
+  ContactDeleteBtn,
   SpinerBox,
 } from './ContactList.styled';
+import { useState } from 'react';
 
 const ContactList = () => {
   const filter = useSelector(state => state.filter.value);
   const { contacts, isLoading, error } = useSelector(state => state.items);
   const dispatch = useDispatch();
+  const [showModal, setShowModal] = useState(false);
+  const [contactID, setcontactID] = useState('');
 
   const deleteContact = (contactId, contactName) => {
     dispatch(removeItem(contactId));
@@ -30,6 +35,15 @@ const ContactList = () => {
   useEffect(() => {
     dispatch(fetchItems());
   }, [dispatch]);
+
+  const toggleModal = () => {
+        setShowModal(!showModal);
+  };
+  
+  const getContactId = e => {
+        setcontactID(e.currentTarget.value);
+        toggleModal();
+    }
 
   return (
     <>
@@ -58,7 +72,13 @@ const ContactList = () => {
                 />
                 <span>{contact.number}</span>
               </ContactInfoContainer>
-              <ContactBtn
+              <ContactEditBtn
+                type="button"
+                value={contact.id}
+                onClick={getContactId}
+                disabled={isLoading}
+              />
+              <ContactDeleteBtn
                 type="button"
                 onClick={() => deleteContact(contact.id, contact.name)}
                 disabled={isLoading}
@@ -67,6 +87,7 @@ const ContactList = () => {
           ))}
         </ContactListUl>
       )}
+      {showModal && <ContactEdit onClose={toggleModal} contactId={contactID} />}
     </>
   );
 };

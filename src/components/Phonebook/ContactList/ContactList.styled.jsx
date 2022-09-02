@@ -31,11 +31,35 @@ export const ContactInfoContainer = styled.div`
   }
 `;
 
-export const ContactBtn = styled.button`
+export const ContactDeleteBtn = styled.button`
   cursor: pointer;
   width: 20px;
   height: 20px;
   background-image: url('https://cdn-icons-png.flaticon.com/512/6861/6861362.png');
+  background-size: cover;
+  border: none;
+  background-color: transparent;
+  outline: none;
+
+  &:hover,
+  &:focus {
+    transform: scale(1.1);
+
+    transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+
+    transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  }
+`;
+
+export const ContactEditBtn = styled.button`
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background-image: url('https://cdn-icons-png.flaticon.com/512/650/650194.png');
   background-size: cover;
   border: none;
   background-color: transparent;

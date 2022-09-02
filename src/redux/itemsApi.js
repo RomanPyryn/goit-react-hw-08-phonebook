@@ -26,7 +26,7 @@ export const fetchItems = () => async dispatch => {
 //  Add new contact
 export const addItem = item => async dispatch => {
   dispatch(fetchItemsRequest());
-  
+
   const response = await axios.post('/contacts', item);
 
   try {
@@ -56,12 +56,14 @@ export const removeItem = itemId => async dispatch => {
 
 //  Edit contact
 export const editItem = (item, itemId) => async dispatch => {
+  dispatch(fetchItemsRequest());
+
   const response = await axios.patch(`/contacts/${itemId}`, item);
 
   try {
     const item = await response.data;
     dispatch(fetchItems());
-    toast.info(`"${item.name}" edited!`);
+    toast.info(`Contact "${item.name}" edited!`);
   } catch (error) {
     dispatch(fetchItemsFailure(error.message));
     toast.error('Sorry! Something went wrong.');
