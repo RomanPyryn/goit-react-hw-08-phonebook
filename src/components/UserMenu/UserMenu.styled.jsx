@@ -26,6 +26,7 @@ export const LogoutBtn = styled.button`
   &:hover,
   &:focus {
     background-color: aliceblue;
+    color: red;
 
     transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
   }
@@ -39,10 +40,6 @@ export const LogoutBtn = styled.button`
 
   &:not(:last-child) {
     margin-right: 10px;
-  }
-
-  &.active {
-    color: #007bcd;
   }
 `;
 

@@ -12,7 +12,7 @@ export const AuthHeader = styled.h1`
   margin-bottom: 35px;
   text-align: center;
   color: #007bcd;
-  text-shadow: 1px 1px 3px #2c2c2c;
+  text-shadow: 1px 1px 3px gray;
 `;
 
 export const AuthForm = styled.form`

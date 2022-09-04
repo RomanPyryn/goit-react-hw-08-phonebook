@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-// import { nanoid } from 'nanoid';
 import { TailSpin } from 'react-loader-spinner';
 import { addItem } from '../../../redux/itemsApi';
 import {
@@ -29,7 +28,7 @@ const ContactForm = () => {
     ) {
       return toast.warn(`"${inputName}" is already in contacts.`);
     }
-    // const contactObj = { id: nanoid(), name: inputName, phone: inputNamber };
+
     const contactObj = { name: inputName, number: inputNamber };
 
     await dispatch(addItem(contactObj));
@@ -66,7 +65,7 @@ const ContactForm = () => {
         <PhonebookBtn type="submit" disabled={isLoading}>
           {isLoading ? (
             <SpinerBox>
-              <TailSpin color="#000" height={16} width={16} />
+              <TailSpin color="#007bcd" height={16} width={16} />
             </SpinerBox>
           ) : (
             '+Add Contact'

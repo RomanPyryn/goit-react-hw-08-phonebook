@@ -59,7 +59,7 @@ function Login() {
         <AuthBtn type="submit" disabled={isLoading}>
           {isLoading ? (
             <SpinerBox>
-              <TailSpin color="#000" height={16} width={16} />
+              <TailSpin color="#007bcd" height={16} width={16} />
             </SpinerBox>
           ) : (
             'Login'

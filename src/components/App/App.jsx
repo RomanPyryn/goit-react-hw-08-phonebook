@@ -8,7 +8,6 @@ import { getUser } from '../../redux/authApi';
 import Loader from 'components/Loader';
 
 const Layout = lazy(() => import('components/Layout'));
-// const Loader = lazy(() => import('components/Loader'));
 const Contacts = lazy(() => import('components/Phonebook'));
 const Login = lazy(() => import('../Authorization/Login/index.jsx'));
 const Register = lazy(() => import('../Authorization/Register/index.jsx'));
@@ -24,27 +23,28 @@ export const App = () => {
   return (
     <Suspense fallback={<Loader />}>
       <Routes>
-        <Route path="/" element={<PublicRoute>
-                <Layout />
-              </PublicRoute>}>
-          <Route
-            index
+        <Route path="/"
+          element={
+            <PublicRoute>
+              <Layout />
+            </PublicRoute>
+          }
+        >
+          <Route index
             element={
               <PrivateRoute>
                 <Contacts />
               </PrivateRoute>
             }
           />
-          <Route
-            path="register"
+          <Route path="register"
             element={
               <PublicRoute restricted>
                 <Register />
               </PublicRoute>
             }
           />
-          <Route
-            path="login"
+          <Route path="login"
             element={
               <PublicRoute restricted>
                 <Login />

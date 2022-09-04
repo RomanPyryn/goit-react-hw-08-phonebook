@@ -19,7 +19,7 @@ const ContactList = () => {
   const { contacts, isLoading, error } = useSelector(state => state.items);
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState(false);
-  const [contactID, setcontactID] = useState('');
+  const [contactId, setcontactId] = useState('');
 
   const deleteContact = (contactId, contactName) => {
     dispatch(removeItem(contactId));
@@ -37,13 +37,13 @@ const ContactList = () => {
   }, [dispatch]);
 
   const toggleModal = () => {
-        setShowModal(!showModal);
+    setShowModal(!showModal);
   };
-  
+
   const getContactId = e => {
-        setcontactID(e.currentTarget.value);
-        toggleModal();
-    }
+    setcontactId(e.currentTarget.value);
+    toggleModal();
+  };
 
   return (
     <>
@@ -87,7 +87,7 @@ const ContactList = () => {
           ))}
         </ContactListUl>
       )}
-      {showModal && <ContactEdit onClose={toggleModal} contactId={contactID} />}
+      {showModal && <ContactEdit onClose={toggleModal} contactId={contactId} />}
     </>
   );
 };

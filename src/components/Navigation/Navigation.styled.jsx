@@ -20,7 +20,7 @@ export const NavigationLink = styled(NavLink)`
   border-radius: 2px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   transform: scale(1);
-  
+
   &:hover,
   &:focus {
     background-color: aliceblue;

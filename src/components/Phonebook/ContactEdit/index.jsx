@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
-// import { toast } from 'react-toastify';
 import { TailSpin } from 'react-loader-spinner';
 import { editItem } from '../../../redux/itemsApi';
 import {
@@ -24,8 +23,8 @@ const ContactEdit = ({ onClose, contactId }) => {
   const { contacts, isLoading, isSuccess } = useSelector(state => state.items);
   const dispatch = useDispatch();
 
-  const contactName = contacts.find(s => s.id === contactId).name;
-  const contactNumber = contacts.find(s => s.id === contactId).number;
+  const contactName = contacts.find(contact => contact.id === contactId).name;
+  const contactNumber = contacts.find(contact => contact.id === contactId).number;
 
   const [name, setName] = useState(contactName);
   const [number, setNumber] = useState(contactNumber);
@@ -106,7 +105,7 @@ const ContactEdit = ({ onClose, contactId }) => {
             <EditBtn type="submit" disabled={isLoading}>
               {isLoading ? (
                 <SpinerBox>
-                  <TailSpin color="#000" height={16} width={16} />
+                  <TailSpin color="#007bcd" height={16} width={16} />
                 </SpinerBox>
               ) : (
                 'Edit'
